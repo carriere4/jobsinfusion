@@ -12,12 +12,11 @@ def run():
 
     st.write("# Welcome to Jobs In Fusion! 👋")
 
-    st.write(st.secrets.db_username)
-
-    conn = st.experimental_connection("postgresql", type="sql")
-    df = conn.query("SELECT * FROM jobs;", ttl="10m")
+    conn = st.experimental_connection("jobs_db", type="sql")
+    print(conn)
+    df = conn.query("SELECT * FROM fusion_job;", ttl="10m")
     for row in df.itertuples():
-        st.write(f"{row.company}")
+        st.write(f"{row}")
 
 
 if __name__ == "__main__":
